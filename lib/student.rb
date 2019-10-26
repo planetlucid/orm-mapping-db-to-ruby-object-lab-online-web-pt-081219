@@ -1,9 +1,19 @@
 class Student
   attr_accessor :id, :name, :grade
 
+# create a new Student object given a row from the database
+  
   def self.new_from_db(row)
-    # create a new Student object given a row from the database
+    sql = <<-SQL
+      SELECT *
+      FROM students
+    SQL
+ 
+    DB[:conn].execute(sql).map do |row|
+      self.new_from_db(row)
+    end
   end
+end
 
   def self.all
     # retrieve all the rows from the "Students" database
