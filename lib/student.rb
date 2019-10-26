@@ -4,13 +4,10 @@ class Student
 # create a new Student object given a row from the database
   
   def self.new_from_db(row)
-    sql = <<-SQL
-      SELECT *
-      FROM students
-    SQL
- 
-    DB[:conn].execute(sql).map do |row|
-      self.new_from_db(row)
+    self.new.tap do |s|
+      s.id = row[0]
+      s.name =  row[1]
+      s.grade = row[2]
     end
   end
 
