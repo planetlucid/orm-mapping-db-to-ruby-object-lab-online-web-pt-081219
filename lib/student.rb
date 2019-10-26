@@ -13,7 +13,7 @@ class Student
       self.new_from_db(row)
     end
   end
-end
+
 
   def self.all
     # retrieve all the rows from the "Students" database
